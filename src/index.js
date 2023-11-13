@@ -4,21 +4,23 @@ import './index.css';
 import App from './App';
 import authentication from '@kdpw/msal-b2c-react';
 
-// TENANT NAME: yuhaoadb2ctenant
-// redirectUri: https://hyustorageaccount01.z13.web.core.windows.net/ or http://localhost:3001/
+console.log("tenantName=" + process.env.REACT_APP_TENANT_NAME);
+console.log("signInPolicy=" + process.env.REACT_APP_SIGN_IN_POLICY);
+console.log("applicationId=" + process.env.REACT_APP_APPLICATION_ID);
+console.log("redirectUri=" + process.env.REACT_APP_REDIRECT_URI);
+
 authentication.initialize({
-    instance: 'https://yuhaoadb2ctenant.b2clogin.com/tfp/',
-    tenant: 'yuhaoadb2ctenant.onmicrosoft.com',
-    signInPolicy: 'B2C_1_SignUpSignIn',
-    applicationId: 'c0fc3f7e-bcc8-420e-bd2d-e3d6f5a569f6',
+    instance: `https://${process.env.REACT_APP_TENANT_NAME}.b2clogin.com/tfp/`,
+    tenant: `${process.env.REACT_APP_TENANT_NAME}.onmicrosoft.com`,
+    signInPolicy: process.env.REACT_APP_SIGN_IN_POLICY,
+    applicationId: process.env.REACT_APP_APPLICATION_ID,
     cacheLocation: 'sessionStorage',
     scopes: ['profile', 'openid'],
-    redirectUri: 'https://hyustorageaccount01.z13.web.core.windows.net/',
+    redirectUri: process.env.REACT_APP_REDIRECT_URI,
     validateAuthority: false
 });
 
 authentication.run(() => {
     ReactDOM.render(<App />, document.getElementById('root'));
+    //ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 });
-
-//ReactDOM.render(<App />, document.getElementById('root'));
