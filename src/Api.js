@@ -5,7 +5,7 @@ import axios from 'axios';
  */
 const constants = {
     api: {
-        baseURL: 'https://hyu-api-service.azure-api.net/hyu-function-app/'
+        baseURL: process.env.REACT_APP_API_BASE_URL
     },
 };
 
@@ -14,5 +14,5 @@ const constants = {
  */
 export default axios.create({
     baseURL: constants.api.baseURL,
-    headers: { 'Ocp-Apim-Subscription-Key': '2209c6acc785429bbc7f39e072a7fe56' }
+    headers: { 'Ocp-Apim-Subscription-Key': process.env.REACT_APP_API_KEY }
 });
